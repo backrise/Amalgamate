@@ -67,7 +67,7 @@ public:
       {
         std::cout << "Warning: duplicate @remap directive" << std::endl;
       }
-      
+
       wasRemap = true;
     }
 
@@ -228,6 +228,7 @@ public:
 
       out->setNewLineString ("\n");
 
+      *out << "#pragma once" << newLine;
       if (! parseFile (m_targetFile.getParentDirectory(),
         m_targetFile,
         *out,
@@ -513,6 +514,13 @@ private:
     {
       String line (lines[i]);
       String trimmed (line.trimStart());
+
+      {
+        String trimLine = trimmed.trim().toLowerCase();
+        if(trimLine.startsWith("#pragma ") && trimLine.endsWith(" once")) {
+          line = String::empty;
+        }
+      }
 
       if ((level != 0) && trimmed.startsWith ("//================================================================"))
         line = String::empty;
