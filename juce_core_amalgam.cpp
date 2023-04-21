@@ -28544,14 +28544,14 @@ namespace SystemStatsHelpers
 	{
 		uint32 la = a, lb = b, lc = c, ld = d;
 
-		asm ("mov %%ebx, %%esi \n\t"
-			 "cpuid \n\t"
-			 "xchg %%esi, %%ebx"
-			   : "=a" (la), "=S" (lb), "=c" (lc), "=d" (ld) : "a" (type)
-		   #if JUCE_64BIT
-				  , "b" (lb), "c" (lc), "d" (ld)
-		   #endif
-		);
+		// asm ("mov %%ebx, %%esi \n\t"
+		// 	 "cpuid \n\t"
+		// 	 "xchg %%esi, %%ebx"
+		// 	   : "=a" (la), "=S" (lb), "=c" (lc), "=d" (ld) : "a" (type)
+		//    #if JUCE_64BIT
+		// 		  , "b" (lb), "c" (lc), "d" (ld)
+		//    #endif
+		// );
 
 		a = la; b = lb; c = lc; d = ld;
 	}
